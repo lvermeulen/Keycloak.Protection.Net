@@ -10,5 +10,5 @@ See documentation at [https://www.keycloak.org/docs/6.0/authorization_services/#
 
 ## Features
 * [X] Resource Management
-* [ ] Permission Management
+* [X] Permission Management
 * [ ] Policy API
