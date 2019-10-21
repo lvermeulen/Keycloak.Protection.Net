@@ -7,7 +7,7 @@ namespace Keycloak.Protection.Net.Tests
     public partial class KeycloakProtectionClientShould
     {
         [Theory]
-        [InlineData("Insurance", "insurance", "270f5bc7-8dcf-430c-a676-3a5e30b1d105")]
+        [InlineData("Insurance", "insurance", "a60c2b25-cbf2-4394-9b62-ecd372dc7877")]
         public async Task CreateGetUpdateGetAllDeleteResourceAsync(string realm, string clientId, string clientSecret)
         {
             // get pat

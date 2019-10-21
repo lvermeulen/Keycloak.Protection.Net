@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using Keycloak.Protection.Net.Common;
 
 namespace Keycloak.Protection.Net
 {
@@ -14,6 +15,7 @@ namespace Keycloak.Protection.Net
 
         public async Task<ResourceCreated> CreateResourceAsync(string realm, string pat, ResourceRequest resourceRequest) => await GetResourceUrl(realm, pat)
             .PostJsonAsync(resourceRequest)
+            .HandleErrorsAsync()
             .ReceiveJson<ResourceCreated>()
             .ConfigureAwait(false);
 
@@ -27,6 +29,7 @@ namespace Keycloak.Protection.Net
             var response = await GetResourceUrl(realm, pat)
                 .AppendPathSegment($"/{resourceId}")
                 .PutJsonAsync(resourceRequest)
+                .HandleErrorsAsync()
                 .ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;
@@ -37,6 +40,7 @@ namespace Keycloak.Protection.Net
             var response = await GetResourceUrl(realm, pat)
                 .AppendPathSegment($"/{resourceId}")
                 .DeleteAsync()
+                .HandleErrorsAsync()
                 .ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;

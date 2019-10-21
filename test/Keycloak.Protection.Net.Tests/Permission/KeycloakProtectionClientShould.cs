@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -8,7 +7,7 @@ namespace Keycloak.Protection.Net.Tests
     public partial class KeycloakProtectionClientShould
     {
         [Theory]
-        [InlineData("Insurance", "insurance", "270f5bc7-8dcf-430c-a676-3a5e30b1d105", "6cb8f9b0-bf6c-49d0-88a5-d5ebbc924c80")]
+        [InlineData("Insurance", "insurance", "a60c2b25-cbf2-4394-9b62-ecd372dc7877", "6cb8f9b0-bf6c-49d0-88a5-d5ebbc924c80")]
         public async Task CreateGetAllDeletePermissionTicketAsync(string realm, string clientId, string clientSecret, string userId)
         {
             // get pat
@@ -39,7 +38,7 @@ namespace Keycloak.Protection.Net.Tests
             try
             {
                 // create
-                var createTicketRequest = new PermissionTicketRequest
+                var createTicketRequest = new PermissionTicket
                 {
                     Resource = createdResource.Id,
                     Requester = userId,

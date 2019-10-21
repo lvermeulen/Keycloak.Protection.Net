@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
 
-namespace Keycloak.Protection.Net.Common.Extensions
+namespace Keycloak.Protection.Net.Common
 {
     public static class FlurlRequestExtensions
     {

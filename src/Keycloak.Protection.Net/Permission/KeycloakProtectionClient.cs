@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using Keycloak.Protection.Net.Common;
 
 namespace Keycloak.Protection.Net
 {
@@ -15,8 +16,9 @@ namespace Keycloak.Protection.Net
         private IFlurlRequest GetPermissionTicketUrl(string realm, string pat) => GetPermissionUrl(realm, pat)
             .AppendPathSegment("/ticket");
 
-        public async Task<PermissionTicket> CreatePermissionTicketAsync(string realm, string pat, PermissionTicketRequest permissionTicketRequest) => await GetPermissionTicketUrl(realm, pat)
-            .PostJsonAsync(permissionTicketRequest)
+        public async Task<PermissionTicket> CreatePermissionTicketAsync(string realm, string pat, PermissionTicket permissionTicket) => await GetPermissionTicketUrl(realm, pat)
+            .PostJsonAsync(permissionTicket)
+            .HandleErrorsAsync()
             .ReceiveJson<PermissionTicket>()
             .ConfigureAwait(false);
 
@@ -42,10 +44,11 @@ namespace Keycloak.Protection.Net
                 .ConfigureAwait(false);
         }
 
-        public async Task<bool> UpdatePermissionTicketAsync(string realm, string pat, PermissionTicketRequest permissionTicketRequest)
+        public async Task<bool> UpdatePermissionTicketAsync(string realm, string pat, PermissionTicket permissionTicket)
         {
             var response = await GetPermissionTicketUrl(realm, pat)
-                .PutJsonAsync(permissionTicketRequest)
+                .PutJsonAsync(permissionTicket)
+                .HandleErrorsAsync()
                 .ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;
@@ -57,6 +60,7 @@ namespace Keycloak.Protection.Net
                 .AppendPathSegment($"/{permissionTicketId}")
                 .AllowAnyHttpStatus()
                 .DeleteAsync()
+                .HandleErrorsAsync()
                 .ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;

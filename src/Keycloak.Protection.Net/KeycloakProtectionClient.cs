@@ -2,7 +2,7 @@
 using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
-using Keycloak.Protection.Net.Common.Extensions;
+using Keycloak.Protection.Net.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
